@@ -1,0 +1,11 @@
+To the extent possible, consider the _examples_ in this repository as released
+into the Public Domain.
+
+Where that is not possible, consider the _examples_ released under your choice of the following licenses. 
+* MIT
+* ISC
+* Apache2
+* X11
+* BSD 2 clause
+
+libopencm3 _itself_ is of course under its own license. (LGPLv3)
