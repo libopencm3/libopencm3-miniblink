@@ -12,6 +12,10 @@ LFLAGS+= template_stm32.c -T ld.stm32.basic
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
+define MakeBoard
+	$(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/$(5)
+endef
+
 include boards.stm32f1.mk
 include boards.stm32f4.mk
 include boards.stm32l1.mk

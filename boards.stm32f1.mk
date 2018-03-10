@@ -11,17 +11,21 @@ BOARDS_STM32F1=$(STM32F1_BOARDS:=.all)
 # STM32F1 starts up with HSI at 8Mhz
 STM32F1_CFLAGS=$(M3_FLAGS) -DSTM32F1 -DLITTLE_BIT=200000 $(LFLAGS) -lopencm3_stm32f1
 
+define STM32F1_MakeBoard
+        $(call MakeBoard,RCC_$(1),$(1),$(2),$(STM32F1_CFLAGS),$(3).elf)
+endef
+
 stm32vldiscovery.all:
-	$(CC) -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO8 $(STM32F1_CFLAGS) -o $(OD)/$@.elf
+	$(call STM32F1_MakeBoard,GPIOC,GPIO8,$@)
 
 olimex-h103.all:
-	$(CC) -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO12 $(STM32F1_CFLAGS) -o $(OD)/$@.elf
+	$(call STM32F1_MakeBoard,GPIOC,GPIO12,$@)
 
 olimex-h107.all:
-	$(CC) -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO6 $(STM32F1_CFLAGS) -o $(OD)/$@.elf
+	$(call STM32F1_MakeBoard,GPIOC,GPIO6,$@)
 
 bluepill.all:
-	$(CC) -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO13 $(STM32F1_CFLAGS) -o $(OD)/$@.elf
+	$(call STM32F1_MakeBoard,GPIOC,GPIO13,$@)
 
 nucleo-f103rb.all:
-	$(CC) -DRCC_LED1=RCC_GPIOA -DPORT_LED1=GPIOA -DPIN_LED1=GPIO5 $(STM32F1_CFLAGS) -o $(OD)/$@.elf
+	$(call STM32F1_MakeBoard,GPIOA,GPIO5,$@)
