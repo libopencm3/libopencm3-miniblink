@@ -1,4 +1,5 @@
 CC=arm-none-eabi-gcc
+OD=bin
 
 STM32L1_BOARDS=stm32l-discovery nucleo-l152re
 STM32F4_BOARDS=stm32f4discovery
@@ -20,21 +21,24 @@ STM32L1_CFLAGS=$(M3_FLAGS) -DSTM32L1 -DLITTLE_BIT=100000 $(LFLAGS) -lopencm3_stm
 STM32F4_CFLAGS=$(M4FH_FLAGS) -DSTM32F4 -DLITTLE_BIT=800000 $(LFLAGS) -lopencm3_stm32f4
 
 
-all: $(BOARDS_L1) $(BOARDS_F4)
+all: outdir $(BOARDS_L1) $(BOARDS_F4)
 
 # New product code for original l1 discovery
 32l152cdiscovery.all: stm32l-discovery.all
 stm32l-discovery.all:
-	$(CC) -DRCC_LED1=RCC_GPIOB -DPORT_LED1=GPIOB -DPIN_LED1=GPIO6 $(STM32L1_CFLAGS) -o $@.elf
+	$(CC) -DRCC_LED1=RCC_GPIOB -DPORT_LED1=GPIOB -DPIN_LED1=GPIO6 $(STM32L1_CFLAGS) -o $(OD)/$@.elf
 nucleo-l152re.all:
-	$(CC) -DRCC_LED1=RCC_GPIOA -DPORT_LED1=GPIOA -DPIN_LED1=GPIO5 $(STM32L1_CFLAGS) -o $@.elf
+	$(CC) -DRCC_LED1=RCC_GPIOA -DPORT_LED1=GPIOA -DPIN_LED1=GPIO5 $(STM32L1_CFLAGS) -o $(OD)/$@.elf
 
 # New product code for original f4 discovery board.
 stm32f407g-disc1.all: stm32f4discovery.all
 stm32f4discovery.all:
-	$(CC) -DRCC_LED1=RCC_GPIOD -DPORT_LED1=GPIOD -DPIN_LED1=GPIO12 $(STM32F4_CFLAGS) -o $@.elf
+	$(CC) -DRCC_LED1=RCC_GPIOD -DPORT_LED1=GPIOD -DPIN_LED1=GPIO12 $(STM32F4_CFLAGS) -o $(OD)/$@.elf
+
+outdir:
+	mkdir -p $(OD)
 
 clean:
 	# eh, I'm sure we can do this better, but this is ok for now.
-	$(RM) *.elf
+	$(RM) -rf $(OD)
 
