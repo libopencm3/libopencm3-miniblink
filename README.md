@@ -12,7 +12,11 @@ peripherals, you are in the *wrong* place.
 
 # Building
 
-Just run make.  It will generate a blinky for every known board in the bin directory
+Just run ```make```.
+
+If necessary, this will checkout and build the libopencm3 repository, and
+then generate a blinky for every known board in the bin directory.
+
 If you want to see exactly what it did, run ```make V=1```
 
 # Next steps

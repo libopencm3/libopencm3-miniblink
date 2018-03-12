@@ -29,7 +29,11 @@ include boards.stm32l1.mk
 
 realall.really: outdir $(BOARDS_ALL)
 
-libopencm3/lib/libopencm3_%.a:
+libopencm3/Makefile:
+	@echo "Initializing libopencm3 submodule"
+	git submodule update --init
+
+libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 	$(MAKE) -C libopencm3
 
 outdir:
