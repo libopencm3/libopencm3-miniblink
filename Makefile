@@ -12,11 +12,14 @@ LFLAGS+= template_stm32.c -T ld.stm32.basic
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
-define MakeBoard
+define RAWMakeBoard
 	$(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/$(5)
 endef
-define CleanBoard
-	$(RM) $(OD)/$(1)
+
+define MakeBoard
+BOARDS_ALL+=$(OD)/$(1).elf
+$(OD)/$(1).elf: template_stm32.c
+	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
 endef
 
 include boards.stm32f1.mk
@@ -28,4 +31,7 @@ realall.really: outdir $(BOARDS_ALL)
 outdir:
 	mkdir -p $(OD)
 
-clean: $(BOARDS_CLEAN)
+clean:
+	$(RM) $(BOARDS_ALL)
+
+.PHONY: realall.really outdir clean all
