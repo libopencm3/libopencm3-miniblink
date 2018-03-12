@@ -4,8 +4,12 @@
 # STM32F1 starts up with HSI at 8Mhz
 STM32F1_CFLAGS=$(M3_FLAGS) -DSTM32F1 -DLITTLE_BIT=200000 $(LFLAGS) -lopencm3_stm32f1
 
-$(eval $(call MakeBoard,stm32vldiscovery,GPIOC,GPIO8,$(STM32F1_CFLAGS)))
-$(eval $(call MakeBoard,olimex-h103,GPIOC,GPIO12,$(STM32F1_CFLAGS)))
-$(eval $(call MakeBoard,olimex-h107,GPIOC,GPIO6,$(STM32F1_CFLAGS)))
-$(eval $(call MakeBoard,bluepill,GPIOC,GPIO13,$(STM32F1_CFLAGS)))
-$(eval $(call MakeBoard,nucleo-f103rb,GPIOA,GPIO5,$(STM32F1_CFLAGS)))
+define stm32f1board
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F1_CFLAGS),stm32f1)
+endef
+
+$(eval $(call stm32f1board,stm32vldiscovery,GPIOC,GPIO8))
+$(eval $(call stm32f1board,olimex-h103,GPIOC,GPIO12))
+$(eval $(call stm32f1board,olimex-h107,GPIOC,GPIO6))
+$(eval $(call stm32f1board,bluepill,GPIOC,GPIO13))
+$(eval $(call stm32f1board,nucleo-f103rb,GPIOA,GPIO5))

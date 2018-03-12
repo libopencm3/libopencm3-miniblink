@@ -18,7 +18,7 @@ endef
 
 define MakeBoard
 BOARDS_ALL+=$(OD)/$(1).elf
-$(OD)/$(1).elf: template_stm32.c
+$(OD)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
 	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
 endef
 
@@ -27,6 +27,9 @@ include boards.stm32f4.mk
 include boards.stm32l1.mk
 
 realall.really: outdir $(BOARDS_ALL)
+
+libopencm3/lib/libopencm3_%.a:
+	$(MAKE) -C libopencm3
 
 outdir:
 	mkdir -p $(OD)
