@@ -19,6 +19,7 @@ endef
 define MakeBoard
 BOARDS_ALL+=$(OD)/$(1).elf
 $(OD)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
+	@echo "  $(5) -> Creating $(OD)/$(1).elf"
 	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
 endef
 
@@ -38,3 +39,4 @@ clean:
 	$(RM) $(BOARDS_ALL)
 
 .PHONY: realall.really outdir clean all
+$(V).SILENT:

@@ -10,6 +10,11 @@ It contains _only_ basic blinky examples, one for each board.  If you are
 looking for full examples that setup complicated clocks, or use onboard
 peripherals, you are in the *wrong* place.
 
+# Building
+
+Just run make.  It will generate a blinky for every known board in the bin directory
+If you want to see exactly what it did, run ```make V=1```
+
 # Next steps
 
 If you _are_ looking for more complicated examples, the [Original libopencm3-examples](http://github.com/libopencm3/libopencm3-examples)
