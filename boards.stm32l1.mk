@@ -6,8 +6,11 @@ STM32L1_CFLAGS=$(M3_FLAGS) -DSTM32L1 -DLITTLE_BIT=100000 $(LFLAGS) -lopencm3_stm
 
 define STM32L1_Board
 BOARDS_ALL+=$(1).all
+BOARDS_CLEAN+=$(1).clean
 $(1).all:
 	$(call MakeBoard,RCC_$(2),$(2),$(3),$(STM32L1_CFLAGS),$(1).elf)
+$(1).clean:
+	$(call CleanBoard,$(1).elf)
 endef
 
 # New product code for original l1 discovery

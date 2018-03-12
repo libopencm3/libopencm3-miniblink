@@ -6,8 +6,11 @@ STM32F1_CFLAGS=$(M3_FLAGS) -DSTM32F1 -DLITTLE_BIT=200000 $(LFLAGS) -lopencm3_stm
 
 define STM32F1_Board
 BOARDS_ALL+=$(1).all
+BOARDS_CLEAN+=$(1).clean
 $(1).all:
 	$(call MakeBoard,RCC_$(2),$(2),$(3),$(STM32F1_CFLAGS),$(1).elf)
+$(1).clean:
+	$(call CleanBoard,$(1).elf)
 endef
 
 $(eval $(call STM32F1_Board,stm32vldiscovery,GPIOC,GPIO8))

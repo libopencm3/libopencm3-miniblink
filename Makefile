@@ -15,6 +15,9 @@ M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 define MakeBoard
 	$(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/$(5)
 endef
+define CleanBoard
+	$(RM) $(OD)/$(1)
+endef
 
 include boards.stm32f1.mk
 include boards.stm32f4.mk
@@ -25,6 +28,4 @@ realall.really: outdir $(BOARDS_ALL)
 outdir:
 	mkdir -p $(OD)
 
-clean:
-	# eh, I'm sure we can do this better, but this is ok for now.
-	$(RM) -rf $(OD)
+clean: $(BOARDS_CLEAN)
