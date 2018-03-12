@@ -20,7 +20,7 @@ include boards.stm32f1.mk
 include boards.stm32f4.mk
 include boards.stm32l1.mk
 
-realall.really: outdir $(BOARDS_STM32F1) $(BOARDS_STM32F4) $(BOARDS_STM32L1)
+realall.really: outdir $(BOARDS_ALL)
 
 outdir:
 	mkdir -p $(OD)
