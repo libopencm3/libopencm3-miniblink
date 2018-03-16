@@ -24,6 +24,7 @@ $(OD)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
 endef
 
 include boards.stm32f1.mk
+include boards.stm32f3.mk
 include boards.stm32f4.mk
 include boards.stm32l1.mk
 
