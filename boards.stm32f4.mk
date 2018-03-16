@@ -12,4 +12,6 @@ endef
 $(eval $(call stm32f4board,stm32f407g-disc1,GPIOD,GPIO12))
 $(eval $(call stm32f4board,stm32f4discover,GPIOD,GPIO12))
 $(eval $(call stm32f4board,nucleo-f411re,GPIOA,GPIO5))
+$(eval $(call stm32f4board,nucleo-f401re,GPIOA,GPIO5))
+$(eval $(call stm32f4board,stm32f429i-disc1,GPIOG,GPIO13))
 
