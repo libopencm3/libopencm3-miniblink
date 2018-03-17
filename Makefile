@@ -9,6 +9,8 @@ SFLAGS+= -I./libopencm3/include -L./libopencm3/lib
 LFLAGS+=-Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 LFLAGS+= template_stm32.c -T ld.stm32.basic
 
+M0_FLAGS= $(SFLAGS) -mcpu=cortex-m0 -mthumb -msoft-float
+M0P_FLAGS= $(SFLAGS) -mcpu=cortex-m0plus -mthumb -msoft-float
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
@@ -23,10 +25,14 @@ $(OD)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
 	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
 endef
 
+include boards.stm32f0.mk
 include boards.stm32f1.mk
+include boards.stm32f2.mk
 include boards.stm32f3.mk
 include boards.stm32f4.mk
+include boards.stm32l0.mk
 include boards.stm32l1.mk
+include boards.stm32l4.mk
 
 realall.really: outdir $(BOARDS_ALL)
 
