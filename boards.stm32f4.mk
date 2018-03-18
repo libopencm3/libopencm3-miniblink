@@ -14,4 +14,7 @@ $(eval $(call stm32f4board,stm32f4discover,GPIOD,GPIO12))
 $(eval $(call stm32f4board,nucleo-f411re,GPIOA,GPIO5))
 $(eval $(call stm32f4board,nucleo-f401re,GPIOA,GPIO5))
 $(eval $(call stm32f4board,stm32f429i-disc1,GPIOG,GPIO13))
-
+$(eval $(call stm32f4board,nucleo-f410rb,GPIOA,GPIO5))
+$(eval $(call stm32f4board,nucleo-f446re,GPIOA,GPIO5))
+$(eval $(call stm32f4board,olimex-p405,GPIOC,GPIO12))
+$(eval $(call stm32f4board,olimex-e407,GPIOC,GPIO13))

@@ -9,3 +9,9 @@ define stm32f0board
 endef
 
 $(eval $(call stm32f0board,stm32f0-discovery,GPIOC,GPIO8))
+$(eval $(call stm32f0board,nucleo-f030r8,GPIOA,GPIO5))
+$(eval $(call stm32f0board,nucleo-f031k6,GPIOB,GPIO3))
+$(eval $(call stm32f0board,nucleo-f042k6,GPIOB,GPIO3))
+$(eval $(call stm32f0board,nucleo-f070rb,GPIOA,GPIO5))
+$(eval $(call stm32f0board,nucleo-f072rb,GPIOA,GPIO5))
+$(eval $(call stm32f0board,nucleo-f091rc,GPIOA,GPIO5))

@@ -9,4 +9,5 @@ define stm32l4board
 endef
 
 $(eval $(call stm32l4board,stm32l476g-disco,GPIOE,GPIO8))
-
+$(eval $(call stm32l4board,nucleo-stm32l432kc,GPIOB,GPIO3))
+$(eval $(call stm32l4board,nucleo-stm32l476rg,GPIOA,GPIO5))

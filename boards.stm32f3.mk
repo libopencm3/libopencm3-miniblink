@@ -9,4 +9,7 @@ define stm32f3board
 endef
 
 $(eval $(call stm32f3board,stm32f3-discovery,GPIOE,GPIO8))
-
+$(eval $(call stm32f3board,nucleo-f302r8,GPIOB,GPIO13))
+$(eval $(call stm32f3board,nucleo-f303k8,GPIOB,GPIO3))
+$(eval $(call stm32f3board,nucleo-f303re,GPIOA,GPIO5))
+$(eval $(call stm32f3board,nucleo-f334r8,GPIOA,GPIO5))

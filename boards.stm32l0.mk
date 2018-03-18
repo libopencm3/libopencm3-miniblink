@@ -9,3 +9,7 @@ define stm32l0board
 endef
 
 $(eval $(call stm32l0board,stm32l0538-disco,GPIOB,GPIO4))
+$(eval $(call stm32l0board,nucleo-l053r8,GPIOA,GPIO5))
+$(eval $(call stm32l0board,nucleo-l073rz,GPIOA,GPIO5))
+$(eval $(call stm32l0board,nucleo-l011k4,GPIOB,GPIO3))
+$(eval $(call stm32l0board,nucleo-l031k6,GPIOB,GPIO3))
