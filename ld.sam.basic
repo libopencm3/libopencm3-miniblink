@@ -1,0 +1,16 @@
+/*
+ * Generic linker script that works for ~all Atmel/Microchip SAM devices
+ * ~all devices have flash at 0x0 and at least 8K
+ * ~all devices have ram at 0x200000000 and at least 4K
+ *
+ * This is enough for miniblink, but if you try and copy this to your own
+ * projects, "You're gonna have a bad day"
+ */
+
+MEMORY
+{
+	rom (rx) : ORIGIN = 0x00000000, LENGTH = 8K
+	ram (rwx) : ORIGIN = 0x20000000, LENGTH = 4K
+}
+
+INCLUDE ./cortex-m-generic.ld

@@ -14,6 +14,7 @@ M0P_FLAGS= $(SFLAGS) -mcpu=cortex-m0plus -mthumb -msoft-float
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
+include boards.sam.mk
 include boards.stm32.mk
 include boards.ti.mk
 
@@ -35,6 +36,7 @@ libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 	$(OBJCOPY) -Oihex $(*).elf $(*).hex
 
 outdir:
+	mkdir -p $(OD)/sam
 	mkdir -p $(OD)/stm32
 	mkdir -p $(OD)/ti
 
