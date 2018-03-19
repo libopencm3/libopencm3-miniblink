@@ -19,6 +19,37 @@ then generate a blinky for every known board in the bin directory.
 
 If you want to see exactly what it did, run ```make V=1```
 
+# Flashing
+
+Unfortunately, flashing these examples is a _very_ openended task.  Below are
+some examples that might be helpful, but this is not an exhaustive list.
+
+## Using [OpenOCD](http://openocd.org/)
+OpenOCD can support a multitude of debug interfaces and targets. Unfortunately
+this makes it's config more verbose than some tools.
+
+The general form is
+```
+$ openocd -f interface/<your debugger>.cfg -f target/<your target>.cfg \ 
+     -c "program file.elf verify reset exit"
+```
+
+For boards with integrated debuggers, you can sometimes shortcut with a "board.cfg" file instead.
+
+```
+$ CMD="program ${ELF_FILE} verify reset exit"
+$ openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c "${CMD}"
+$ openocd -f board/stm32l4discovery.cfg -c "${CMD}"
+```
+
+## Using [st-flash](https://github.com/texane/stlink)
+st-flash or st-util can be used with STM32 targets only, with STLink
+debugger hardware.
+
+```
+$ st-flash write path/to/yourfile.bin 0x800000
+```
+
 # Next steps
 
 If you _are_ looking for more complicated examples, the [Original libopencm3-examples](http://github.com/libopencm3/libopencm3-examples)
