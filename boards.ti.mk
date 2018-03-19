@@ -2,6 +2,8 @@
 # 1) add a rule for your board, following the style in place.
 # This file should cover all the TI boards, lm3s, lm4f, tiva, msp432
 
+LFLAGS_TI=$(LFLAGS) template_ti.c -T ld.ti.basic
+
 # FIXME what are default clock speeds?
 LM3S_CFLAGS=$(M3_FLAGS) -DLM3S -DLITTLE_BIT=800000 $(LFLAGS_TI) -lopencm3_lm3s
 LM4F_CFLAGS=$(M4FH_FLAGS) -DLM4F -DLITTLE_BIT=800000 $(LFLAGS_TI) -lopencm3_lm4f
