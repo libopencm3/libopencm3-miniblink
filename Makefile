@@ -10,6 +10,9 @@ SFLAGS+= -I./libopencm3/include -L./libopencm3/lib
 LFLAGS+=-Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 LFLAGS+= template_stm32.c -T ld.stm32.basic
 
+LFLAGS_TI+=-Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
+LFLAGS_TI+= template_ti.c -T ld.ti.basic
+
 M0_FLAGS= $(SFLAGS) -mcpu=cortex-m0 -mthumb -msoft-float
 M0P_FLAGS= $(SFLAGS) -mcpu=cortex-m0plus -mthumb -msoft-float
 M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
@@ -36,6 +39,7 @@ include boards.stm32f4.mk
 include boards.stm32l0.mk
 include boards.stm32l1.mk
 include boards.stm32l4.mk
+include boards.ti.mk
 
 realall.really: outdir $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
 
@@ -56,6 +60,7 @@ libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 
 outdir:
 	mkdir -p $(OD)
+	mkdir -p $(OD)/ti
 
 clean:
 	$(RM) $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
