@@ -1,4 +1,5 @@
 CC=arm-none-eabi-gcc
+OBJCOPY=arm-none-eabi-objcopy
 OD=bin
 
 all: realall.really
@@ -19,7 +20,9 @@ define RAWMakeBoard
 endef
 
 define MakeBoard
-BOARDS_ALL+=$(OD)/$(1).elf
+BOARDS_ELF+=$(OD)/$(1).elf
+BOARDS_BIN+=$(OD)/$(1).bin
+BOARDS_HEX+=$(OD)/$(1).hex
 $(OD)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
 	@echo "  $(5) -> Creating $(OD)/$(1).elf"
 	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
@@ -34,7 +37,7 @@ include boards.stm32l0.mk
 include boards.stm32l1.mk
 include boards.stm32l4.mk
 
-realall.really: outdir $(BOARDS_ALL)
+realall.really: outdir $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
 
 libopencm3/Makefile:
 	@echo "Initializing libopencm3 submodule"
@@ -43,11 +46,19 @@ libopencm3/Makefile:
 libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 	$(MAKE) -C libopencm3
 
+%.bin: %.elf
+	@#printf "  OBJCOPY $(*).bin\n"
+	$(OBJCOPY) -Obinary $(*).elf $(*).bin
+
+%.hex: %.elf
+	@#printf "  OBJCOPY $(*).hex\n"
+	$(OBJCOPY) -Oihex $(*).elf $(*).hex
+
 outdir:
 	mkdir -p $(OD)
 
 clean:
-	$(RM) $(BOARDS_ALL)
+	$(RM) $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
 
 .PHONY: realall.really outdir clean all
 $(V).SILENT:
