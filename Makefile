@@ -15,6 +15,7 @@ M3_FLAGS= $(SFLAGS) -mcpu=cortex-m3 -mthumb -msoft-float
 M4FH_FLAGS= $(SFLAGS) -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 M7SP_FLAGS= $(SFLAGS) -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16
 
+include boards.efm32.mk
 include boards.sam.mk
 include boards.stm32.mk
 include boards.ti.mk
@@ -37,6 +38,7 @@ libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 	$(OBJCOPY) -Oihex $(*).elf $(*).hex
 
 outdir:
+	mkdir -p $(OD)/efm32
 	mkdir -p $(OD)/sam
 	mkdir -p $(OD)/stm32
 	mkdir -p $(OD)/ti
