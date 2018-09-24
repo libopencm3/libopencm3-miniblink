@@ -1,5 +1,6 @@
-CC=arm-none-eabi-gcc
-OBJCOPY=arm-none-eabi-objcopy
+PREFIX?=arm-none-eabi-
+CC=$(PREFIX)gcc
+OBJCOPY=$(PREFIX)objcopy
 OD=bin
 
 all: realall.really
