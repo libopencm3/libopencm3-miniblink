@@ -47,7 +47,7 @@ st-flash or st-util can be used with STM32 targets only, with STLink
 debugger hardware.
 
 ```
-$ st-flash write path/to/yourfile.bin 0x800000
+$ st-flash write path/to/yourfile.bin 0x8000000
 ```
 
 # Next steps
