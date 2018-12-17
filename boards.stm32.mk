@@ -112,6 +112,7 @@ $(eval $(call stm32f4board,olimex-e407,GPIOC,GPIO13))
 
 # STM32F7 boards
 $(eval $(call stm32f7board,stm32f746g-disco,GPIOI,GPIO1))
+$(eval $(call stm32f7board,nucleo-f767zi,GPIOB,GPIO0))
 
 # STM32L0 boards
 $(eval $(call stm32l0board,stm32l0538-disco,GPIOB,GPIO4))
