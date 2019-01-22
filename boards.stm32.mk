@@ -22,6 +22,8 @@ STM32L0_CFLAGS=$(M0P_FLAGS) -DSTM32L0 -DLITTLE_BIT=50000 $(LFLAGS_STM32) -lopenc
 STM32L1_CFLAGS=$(M3_FLAGS) -DSTM32L1 -DLITTLE_BIT=100000 $(LFLAGS_STM32) -lopencm3_stm32l1
 # STM32L4 starts up with MSI at 4MHz
 STM32L4_CFLAGS=$(M4FH_FLAGS) -DSTM32L4 -DLITTLE_BIT=100000 $(LFLAGS_STM32) -lopencm3_stm32l4
+# STM32G0 starts up with HSI at 16MHz
+STM32G0_CFLAGS=$(M0P_FLAGS) -DSTM32G0 -DLITTLE_BIT=400000 $(LFLAGS_STM32) -lopencm3_stm32g0
 
 define RAWMakeBoard
 	$(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/stm32/$(5)
@@ -62,6 +64,9 @@ define stm32l1board
 endef
 define stm32l4board
 	$(call MakeBoard,$(1),$(2),$(3),$(STM32L4_CFLAGS),stm32l4)
+endef
+define stm32g0board
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32G0_CFLAGS),stm32g0)
 endef
 
 # STM32F0 boards
@@ -134,3 +139,6 @@ $(eval $(call stm32l4board,stm32l476g-disco,GPIOE,GPIO8))
 $(eval $(call stm32l4board,nucleo-stm32l432kc,GPIOB,GPIO3))
 $(eval $(call stm32l4board,nucleo-stm32l476rg,GPIOA,GPIO5))
 $(eval $(call stm32l4board,nucleo-l4r5zi,GPIOC,GPIO7,GPIOB,GPIO7))
+
+# STM32G0 boards
+$(eval $(call stm32g0board,nucleo-g071rb,GPIOA,GPIO5))
