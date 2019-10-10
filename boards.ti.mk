@@ -8,10 +8,10 @@ LFLAGS_TI=$(LFLAGS) template_ti.c -T ld.ti.basic
 LM3S_CFLAGS=$(M3_FLAGS) -DLM3S -DLITTLE_BIT=800000 $(LFLAGS_TI) -lopencm3_lm3s
 LM4F_CFLAGS=$(M4FH_FLAGS) -DLM4F -DLITTLE_BIT=800000 $(LFLAGS_TI) -lopencm3_lm4f
 
-
-# FIXME - support led2
 define RAWMakeBoard
-        $(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/ti/$(5)
+	$(CC) -DRCC_LED1=RCC_$(1) -DPORT_LED1=$(1) -DPIN_LED1=$(2) \
+		$(if $(5),-DRCC_LED2=RCC_$(5) -DPORT_LED2=$(5) -DPIN_LED2=$(6),) \
+		$(3) -o $(OD)/ti/$(4)
 endef
 
 define MakeBoard
@@ -20,7 +20,7 @@ BOARDS_BIN+=$(OD)/ti/$(1).bin
 BOARDS_HEX+=$(OD)/ti/$(1).hex
 $(OD)/ti/$(1).elf: template_ti.c libopencm3/lib/libopencm3_$(5).a
 	@echo "  $(5) -> Creating $(OD)/ti/$(1).elf"
-	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
+	$(call RAWMakeBoard,$(2),$(3),$(4),$(1).elf,$(6),$(7))
 endef
 
 define lm3sboard
