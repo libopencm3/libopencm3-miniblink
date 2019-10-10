@@ -26,7 +26,12 @@ STM32L4_CFLAGS=$(M4FH_FLAGS) -DSTM32L4 -DLITTLE_BIT=100000 $(LFLAGS_STM32) -lope
 STM32G0_CFLAGS=$(M0P_FLAGS) -DSTM32G0 -DLITTLE_BIT=400000 $(LFLAGS_STM32) -lopencm3_stm32g0
 
 define RAWMakeBoard
-	$(CC) -DRCC_LED1=$(1) -DPORT_LED1=$(2) -DPIN_LED1=$(3) $(4) -o $(OD)/stm32/$(5)
+	$(CC) -DRCC_LED1=RCC_$(1) -DPORT_LED1=$(1) -DPIN_LED1=$(2) $(3) -o $(OD)/stm32/$(4)
+endef
+define RAWMakeBoard2
+	$(CC) -DRCC_LED1=RCC_$(1) -DPORT_LED1=$(1) -DPIN_LED1=$(2) \
+		-DRCC_LED2=RCC_$(5) -DPORT_LED2=$(5) -DPIN_LED2=$(6) \
+		$(3) -o $(OD)/stm32/$(4)
 endef
 
 define MakeBoard
@@ -35,35 +40,39 @@ BOARDS_BIN+=$(OD)/stm32/$(1).bin
 BOARDS_HEX+=$(OD)/stm32/$(1).hex
 $(OD)/stm32/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
 	@echo "  $(5) -> Creating $(OD)/stm32/$(1).elf"
-	$(call RAWMakeBoard,RCC_$(2),$(2),$(3),$(4),$(1).elf)
+ifeq ($(6),)
+		$(call RAWMakeBoard,$(2),$(3),$(4),$(1).elf)
+else
+		$(call RAWMakeBoard2,$(2),$(3),$(4),$(1).elf,$(6),$(7))
+endif
 endef
 
 define stm32f0board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F0_CFLAGS),stm32f0)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F0_CFLAGS),stm32f0,$(4),$(5))
 endef
 define stm32f1board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F1_CFLAGS),stm32f1)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F1_CFLAGS),stm32f1,$(4),$(5))
 endef
 define stm32f2board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F2_CFLAGS),stm32f2)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F2_CFLAGS),stm32f2,$(4),$(5))
 endef
 define stm32f3board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F3_CFLAGS),stm32f3)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F3_CFLAGS),stm32f3,$(4),$(5))
 endef
 define stm32f4board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F4_CFLAGS),stm32f4)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F4_CFLAGS),stm32f4,$(4),$(5))
 endef
 define stm32f7board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32F7_CFLAGS),stm32f7)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32F7_CFLAGS),stm32f7,$(4),$(5))
 endef
 define stm32l0board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32L0_CFLAGS),stm32l0)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32L0_CFLAGS),stm32l0,$(4),$(5))
 endef
 define stm32l1board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32L1_CFLAGS),stm32l1)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32L1_CFLAGS),stm32l1,$(4),$(5))
 endef
 define stm32l4board
-	$(call MakeBoard,$(1),$(2),$(3),$(STM32L4_CFLAGS),stm32l4)
+	$(call MakeBoard,$(1),$(2),$(3),$(STM32L4_CFLAGS),stm32l4,$(4),$(5))
 endef
 define stm32g0board
 	$(call MakeBoard,$(1),$(2),$(3),$(STM32G0_CFLAGS),stm32g0)
