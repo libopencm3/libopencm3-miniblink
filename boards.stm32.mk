@@ -131,6 +131,7 @@ $(eval $(call stm32f4board,olimex-p405,GPIOC,GPIO12))
 $(eval $(call stm32f4board,olimex-e407,GPIOC,GPIO13))
 $(eval $(call stm32f4board,black-stm32f407ve-v2.0,GPIOA,GPIO6))
 $(eval $(call stm32f4board,devebox-stm32f407vgt6,GPIOA,GPIO1))
+$(eval $(call stm32f4board,weact-studio-minif4x1,GPIOC,GPIO13))
 
 # STM32F7 boards
 $(eval $(call stm32f7board,stm32f746g-disco,GPIOI,GPIO1))
