@@ -27,3 +27,4 @@ define samdboard
 endef
 
 $(eval $(call samdboard,samd10-xplained-mini,PORTA,9))
+$(eval $(call samdboard,samd11-xplained-pro,PORTA,16))
