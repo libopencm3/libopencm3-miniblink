@@ -164,6 +164,7 @@ $(eval $(call stm32g0board,stm32g0316-disco,GPIOA,GPIO12))
 
 # STM32G4 boards
 $(eval $(call stm32g4board,nucleo-g431rb,GPIOA,GPIO5))
+$(eval $(call stm32g4board,nucleo-g491re,GPIOA,GPIO5))
 
 # STM32H7 boards
 $(eval $(call stm32h7board,stm32h743zi,GPIOB,GPIO0,GPIOE,GPIO1))
