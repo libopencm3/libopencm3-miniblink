@@ -1,0 +1,16 @@
+/*
+ * Generic linker script that works for ~all NRF52
+ * ~all NRF52 devices have flash at 0x0 and at least 192K
+ * ~all NRF52 devices have ram at 0x200000000 and at least 24K
+ *
+ * This is enough for miniblink, but if you try and copy this to your own
+ * projects, "You're gonna have a bad day"
+ */
+
+MEMORY
+{
+	rom (rx) : ORIGIN = 0x00000000, LENGTH = 192K
+	ram (rwx) : ORIGIN = 0x20000000, LENGTH = 24K
+}
+
+INCLUDE ./cortex-m-generic.ld

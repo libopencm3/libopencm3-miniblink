@@ -21,6 +21,7 @@ include boards.efm32.mk
 include boards.sam.mk
 include boards.stm32.mk
 include boards.ti.mk
+include boards.nrf.mk
 
 realall.really: outdir $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
 
@@ -44,6 +45,7 @@ outdir:
 	mkdir -p $(OD)/sam
 	mkdir -p $(OD)/stm32
 	mkdir -p $(OD)/ti
+	mkdir -p $(OD)/nrf52
 
 clean:
 	$(RM) $(BOARDS_ELF) $(BOARDS_BIN) $(BOARDS_HEX)
