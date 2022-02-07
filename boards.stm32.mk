@@ -155,6 +155,7 @@ $(eval $(call stm32l1board,32l100cdiscovery,GPIOB,GPIO6))
 # STM32L4 boards
 $(eval $(call stm32l4board,stm32l476g-disco,GPIOE,GPIO8))
 $(eval $(call stm32l4board,nucleo-stm32l432kc,GPIOB,GPIO3))
+$(eval $(call stm32l4board,nucleo-stm32l452re,GPIOA,GPIO5))
 $(eval $(call stm32l4board,nucleo-stm32l476rg,GPIOA,GPIO5))
 $(eval $(call stm32l4board,nucleo-l4r5zi,GPIOC,GPIO7,GPIOB,GPIO7))
 
