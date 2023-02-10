@@ -169,3 +169,4 @@ $(eval $(call stm32g4board,nucleo-g491re,GPIOA,GPIO5))
 
 # STM32H7 boards
 $(eval $(call stm32h7board,stm32h743zi,GPIOB,GPIO0,GPIOE,GPIO1))
+$(eval $(call stm32h7board,nucleo-h723zg,GPIOB,GPIO0,GPIOE,GPIO1))
