@@ -43,7 +43,6 @@ libopencm3/lib/libopencm3_%.a: libopencm3/Makefile
 outdir:
 	mkdir -p $(OD)/efm32
 	mkdir -p $(OD)/sam
-	mkdir -p $(OD)/stm32
 	mkdir -p $(OD)/ti
 	mkdir -p $(OD)/nrf52
 

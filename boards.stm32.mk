@@ -30,18 +30,19 @@ STM32G4_CFLAGS=$(M4FH_FLAGS) -DSTM32G4 -DLITTLE_BIT=400000 $(LFLAGS_STM32) -lope
 STM32H7_CFLAGS=$(M7DP_FLAGS) -DSTM32H7 -DLITTLE_BIT=3200000 $(LFLAGS_STM32) -lopencm3_stm32h7
 
 define RAWMakeBoard
+	mkdir -p $(OD)/$(7)
 	$(CC) -DRCC_LED1=RCC_$(1) -DPORT_LED1=$(1) -DPIN_LED1=$(2) \
 		$(if $(5),-DRCC_LED2=RCC_$(5) -DPORT_LED2=$(5) -DPIN_LED2=$(6),) \
-		$(3) -o $(OD)/stm32/$(4)
+		$(3) -o $(OD)/$(7)/$(4)
 endef
 
 define MakeBoard
-BOARDS_ELF+=$(OD)/stm32/$(1).elf
-BOARDS_BIN+=$(OD)/stm32/$(1).bin
-BOARDS_HEX+=$(OD)/stm32/$(1).hex
-$(OD)/stm32/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
-	@echo "  $(5) -> Creating $(OD)/stm32/$(1).elf"
-	$(call RAWMakeBoard,$(2),$(3),$(4),$(1).elf,$(6),$(7))
+BOARDS_ELF+=$(OD)/$(5)/$(1).elf
+BOARDS_BIN+=$(OD)/$(5)/$(1).bin
+BOARDS_HEX+=$(OD)/$(5)/$(1).hex
+$(OD)/$(5)/$(1).elf: template_stm32.c libopencm3/lib/libopencm3_$(5).a
+	@echo "  $(5) -> Creating $(OD)/$(5)/$(1).elf"
+	$(call RAWMakeBoard,$(2),$(3),$(4),$(1).elf,$(6),$(7),$(5))
 endef
 
 define stm32f0board
